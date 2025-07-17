@@ -11,24 +11,40 @@ You'll need to install Git and the Git LFS extension (which can be found [here](
 ## Traffic Analysis Solution
 
 ### Task Overview
-This solution analyzes a large web server log file to identify suspicious non-human traffic that may be causing server overloading. The Python script detects patterns consistent with bots or automated traffic and provides actionable insights to improve server performance.
+This solution performs advanced analysis of web server logs to detect sophisticated non-human traffic patterns that may be causing server overloading. The Python script uses statistical methods and behavioral analysis to identify bots, crawlers, and other automated traffic with high precision.
 
 ### Solution Approach
 The `analyze_traffic.py` script:
-1. Parses web server log entries using regex to extract key information
-2. Identifies suspicious IPs based on three key criteria:
-   - IPs making excessive requests (>100)
-   - IPs repeatedly requesting the same URL (>20 times)
-   - IPs showing machine-like request timing patterns
-3. Analyzes traffic patterns including peak hours and distribution
-4. Generates a report of suspicious activities
+
+1. Performs multi-pass analysis of log data:
+   - First pass collects comprehensive metrics about each IP
+   - Second pass applies statistical and behavioral analysis algorithms
+
+2. Identifies suspicious traffic using advanced detection methods:
+   - Statistical outlier detection (uses mean + standard deviation)
+   - Machine-like request timing patterns (regularity analysis)
+   - URL diversity ratio analysis (for crawler/scanner detection)
+   - HTTP method distribution analysis
+   - Response time anomaly detection
+
+3. Provides detailed analysis reports:
+   - Hourly traffic distribution with percentage breakdown
+   - Country-based traffic patterns
+   - HTTP method usage statistics
+   - Comprehensive reasons for each flagged IP
 
 ### Results
 When executed, the script will:
-- Display overall traffic statistics
-- Identify the peak traffic hours
-- List the top suspicious IPs with their activity patterns
-- Show the most commonly requested URLs by suspicious IPs
+
+- Display statistical baseline metrics (average requests per IP, thresholds)
+- Provide hourly traffic distribution with percentage breakdowns
+- Show peak traffic periods for capacity planning
+- List the top 10 most suspicious IPs with:
+  - Country of origin
+  - Request volume statistics
+  - Most requested URLs
+  - HTTP method distribution
+  - Detailed reasons for flagging each IP with specific metrics
 
 ### How to Run
 
@@ -42,6 +58,6 @@ When executed, the script will:
    ```
    python analyze_traffic.py
    ```
-3. Review the output for traffic analysis insights
+3. Review the comprehensive output for traffic analysis insights
 
-The script is designed to work efficiently with large log files (>50MB) and provides focused insights without unnecessary visualizations or dependencies.
+The script is optimized for large log files (>50MB) and provides sophisticated analysis without external dependencies. The enhanced detection algorithms can identify a wide range of automated traffic patterns including bots, crawlers, scanners, and DoS attempts.
